@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-9" style="text-align: center">
+      <div class="card">
+        <div class="card-header">
+          <h4>Listado Productos</h4>
+          <button class="btn btn-success float-end" routerLink="/crear-producto">NUEVO</button>
+        </div>
+        <div>
+          <table *ngIf="listProductos.length>0" class="table table-striped">
+            <tr>
+              <th>Producto</th>
+              <th>Categoría</th>
+              <th>Ubicación</th>
+              <th>Precio</th>
+              <th>Acciones</th>
+            </tr>
+            <tr *ngFor="let producto of listProductos">
+              <td>{{producto.nombre}}</td>
+              <td>{{producto.categoria}}</td>
+              <td>{{producto.ubicacion}}</td>
+              <td>{{producto.precio | currency: 'USD'}}</td>
+              <td>
+                <div>
+                <a class="btn btn-secondary" [routerLink]="['/editar-producto',producto._id]" role="button">
+                  <i class="fas fa-edit"></i> Editar
+                </a>
+                <a class="btn btn-danger" (click)="eliminarProducto(producto._id)">
+                  <i class="fas fa-trash"></i> Eliminar
+                </a>
+                </div>
+              </td>
+            </tr>
+          </table>
+          <h5 *ngIf="listProductos.length==0">No hay productos para mostrar</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-center bg-success text-white mb-3">
+        <div class="card-body">
+          <h3>Total Productos</h3>
+          <h4 class="display-4">
+            <i class="fas fa-users"></i> {{listProductos.length}}
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
